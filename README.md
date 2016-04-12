@@ -1,7 +1,7 @@
 # CsdnDemoCode
 
 2016/04/12
+æ·»åŠ é—ªçƒçš„TextViewï¼Œä»å·¦åˆ°å³ï¼Œçº¿æ€§æ¸å˜ï¼Œä½¿ç”¨LinearGradientå®ç°ã€‚æ•ˆæœå›¾å¦‚ä¸‹ï¼š
 
-Ìí¼ÓÉÁË¸µÄTextView£¬´Ó×óµ½ÓÒ£¬ÏßĞÔ½¥±ä£¬Ê¹ÓÃLinearGradientÊµÏÖ¡£Ğ§¹ûÍ¼ÈçÏÂ£º
 
-![Ğ§¹ûÍ¼](https://github.com/tuozhaobing/ScaleDragCircleView/blob/master/demolarge.gif) 
+![æ•ˆæœå›¾](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/FlashTextView.gif) 
