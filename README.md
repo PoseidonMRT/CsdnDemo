@@ -28,3 +28,12 @@
 
 ![效果图](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/MusicRectDemo.gif) 
 
+
+#2016/04/12
+添加仪表盘，效果图如下：
+
+
+
+
+![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/2016-04-12%2021:58:07%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
+
