@@ -2,17 +2,24 @@
 
 
 
-2016/04/12
+#2016/04/12
 
-Ìí¼ÓÉÁË¸µÄTextView£¬´Ó×óµ½ÓÒ£¬ÏßĞÔ½¥±ä£¬Ê¹ÓÃLinearGradientÊµÏÖ¡£Ğ§¹ûÍ¼ÈçÏÂ£º
-
-
+æ·»åŠ é—ªçƒçš„TextViewï¼Œä»å·¦åˆ°å³ï¼Œçº¿æ€§æ¸å˜ï¼Œä½¿ç”¨LinearGradientå®ç°ã€‚æ•ˆæœå›¾å¦‚ä¸‹ï¼š
 
 
 
-![Ğ§¹ûÍ¼](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/FlashTextView.gif) 
 
 
-2016/04/12
-Ìí¼ÓÒ»¸ö¿ÉË«Ö¸·ÅËõµÄZoomLayout¼Ì³Ğ×ÔFrameLayout£¬×¢ÒâÖ»ÓĞµ±ÓĞÒ»¸ö×ÓViewÊ±²ÅÓĞ×÷ÓÃ¡£
+![æ•ˆæœå›¾](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/FlashTextView.gif) 
+
+
+#2016/04/12
+.æ·»åŠ ä¸€ä¸ªå¯åŒæŒ‡æ”¾ç¼©çš„ZoomLayoutç»§æ‰¿è‡ªFrameLayoutï¼Œæ³¨æ„åªæœ‰å½“æœ‰ä¸€ä¸ªå­Viewæ—¶æ‰æœ‰ä½œç”¨ã€‚
+
+
+#2016/04/12
+.æ·»åŠ ä¸€ä¸ªéŸ³é¢‘æ¡å½¢å›¾ï¼Œæ•ˆæœå›¾å¦‚ä¸‹ï¼š
+.
+.
+![æ•ˆæœå›¾](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/MusicRectDemo.gif) 
 
