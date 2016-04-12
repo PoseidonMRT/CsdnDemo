@@ -19,7 +19,12 @@
 
 #2016/04/12
 .添加一个音频条形图，效果图如下：
-.
-.
+
+
+
+
+
+
+
 ![效果图](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/MusicRectDemo.gif) 
 
