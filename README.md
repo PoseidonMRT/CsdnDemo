@@ -41,7 +41,7 @@
 #2016/04/13
 添加沉浸式状态栏，效果图如下：
 
-![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/12.png)
+![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/12.PNG)
 
 
 
