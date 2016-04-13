@@ -37,3 +37,11 @@
 
 ![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/2016-04-12%2021:58:07%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png)
 
+
+#2016/04/13
+添加沉浸式状态栏，效果图如下：
+
+![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/12.PNG)
+
+
+
