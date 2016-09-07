@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceScreen
+        android:title="测试01"
+        android:key="test01"
+        android:summary="test 01 ,test"></PreferenceScreen>
+    <PreferenceScreen
+        android:title="测试02"
+        android:key="test02"
+        android:summary="test 02 ,test"></PreferenceScreen>
+    <PreferenceScreen
+        android:title="测试03"
+        android:key="test03"
+        android:summary="test 03 ,test"></PreferenceScreen>
+    <PreferenceScreen
+        android:title="测试04"
+        android:key="test04"
+        android:summary="test 04 ,test"></PreferenceScreen>
+</PreferenceScreen>
