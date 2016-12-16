@@ -50,5 +50,11 @@
 
 ![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/1.PNG)
 
+#2016/12/17
+添加DataBinding demo，效果图：
+
+![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/9.png)
+
+
 
 
