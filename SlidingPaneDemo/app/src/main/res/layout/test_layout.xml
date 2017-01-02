@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SlidingPaneLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/spl_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:id="@+id/tv_left"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:text="左侧菜单"
+        android:textSize="22sp"
+        android:background="#ff0000"/>
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="这是内容"
+        android:textSize="24sp"
+        android:background="@color/colorPrimaryDark"/>
+</android.support.v4.widget.SlidingPaneLayout>

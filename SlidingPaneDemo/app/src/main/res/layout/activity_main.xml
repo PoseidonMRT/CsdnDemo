@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SlidingPaneLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sliding_pane_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tuozhaobing.slidingpanedemo.MainActivity">
+    <ListView
+        android:id="@+id/left_pane"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="0dp"
+        android:paddingRight="0dp"
+        android:layout_gravity="left"
+        ></ListView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="outsideOverlay"
+        android:background="#ff333333">
+        <TextView
+            android:id="@+id/content_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sliding_pane_layout_summary"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+    </ScrollView>
+
+</android.support.v4.widget.SlidingPaneLayout>
