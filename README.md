@@ -56,5 +56,10 @@
 ![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/9.png)
 
 
+#2017/01/02
+添加SlidingPaneLayout效果图：
+![](https://github.com/tuozhaobing/CsdnDemoCode/blob/master/slidingpane.gif)
+
+
 
 
