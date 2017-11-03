@@ -3,15 +3,12 @@ package com.example.code.floatingwindowdemo;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 /**
@@ -24,20 +21,79 @@ public abstract class FloatingWindow {
     protected static final String TAG = "FloatingWindow";
     protected final Context mContext;
     protected final String mName;
-    protected final int mWidth;
-    protected final int mHeight;
-    protected final int mGravity;
+    protected final int mGravity ;
 
-    protected FloatingWindow(Context mContext, String mName,int mWidth, int mHeight, int mGravity) {
+    protected FloatingWindow(Context mContext, String mName, int mGravity) {
         this.mContext = mContext;
         this.mName = mName;
-        this.mWidth = mWidth;
-        this.mHeight = mHeight;
         this.mGravity = mGravity;
     }
 
-    public static FloatingWindow create(Context mContext, String mName,int mWidth, int mHeight, int mGravity){
-        return new TextFloatingView(mContext,mName,mWidth,mHeight,mGravity);
+    public static class Builder{
+        private Context context;
+        private int windowType;
+        private String name;
+        private int gravity;
+        private int layoutResource;
+        private View contentView;
+        private boolean dragEnabled;
+        private boolean clickable;
+        private int positionX;
+        private int positionY;
+
+        public Builder(Context context,int gravity) {
+            this.context = context;
+            this.gravity = gravity;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder setGravity(int gravity) {
+            this.gravity = gravity;
+            return this;
+        }
+
+        public Builder setDragEnabled(boolean dragEnabled) {
+            this.dragEnabled = dragEnabled;
+            return this;
+        }
+
+        public Builder setContentView(int resourceId){
+            this.layoutResource = resourceId;
+            return this;
+        }
+
+        public Builder setContentView(View content){
+            this.contentView = content;
+            return this;
+        }
+
+        public Builder setClickable(boolean clickable){
+            this.clickable = clickable;
+            return this;
+        }
+
+        public Builder setPositionX(int x){
+            this.positionX = x;
+            return this;
+        }
+
+        public Builder setPositionY(int y){
+            this.positionY = y;
+            return this;
+        }
+
+        public Builder setWindowType(int type){
+            this.windowType = type;
+            return this;
+        }
+
+        public FloatingWindow buildCustom(){
+            return new CustomFloatingView(this.context,this.name,this.gravity,this.contentView,this.layoutResource,this.positionX,this.positionY,this.dragEnabled,this.clickable);
+        }
     }
 
     public Context getContext(){
@@ -48,7 +104,7 @@ public abstract class FloatingWindow {
 
     public abstract void dismiss();
 
-    private static final class TextFloatingView extends FloatingWindow{
+    private static final class CustomFloatingView extends FloatingWindow{
 
         private final WindowManager mWindowManager;
         private boolean mWindowVisiable;
@@ -58,15 +114,31 @@ public abstract class FloatingWindow {
 
         private GestureDetector mGestureDetector;
 
-        private int mWindowX;
-        private int mWindowY;
+        private int mWindowPositionX;
+        private int mWindowPositionY;
+        private int mContentResourceId;
+
+        private View mContentView;
+        private boolean mDragEnabled = true;
+        private boolean mClickable = true;
 
         private float mLiveTranslationX;
         private float mLiveTranslationY;
 
-        protected TextFloatingView(Context mContext, String mName, int mWidth, int mHeight, int mGravity) {
-            super(mContext, mName, mWidth, mHeight, mGravity);
+        protected CustomFloatingView(Context mContext, String mName, int mGravity) {
+            super(mContext, mName, mGravity);
             mWindowManager = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+        }
+
+        public CustomFloatingView(Context mContext, String mName, int mGravity, View contentView,int resourceId,int mWindowPositionX, int mWindowPositionY,  boolean dragEnabled, boolean clickable) {
+            super(mContext, mName, mGravity);
+            mWindowManager = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
+            this.mWindowPositionX = mWindowPositionX;
+            this.mWindowPositionY = mWindowPositionY;
+            this.mContentView = contentView;
+            this.mContentResourceId = resourceId;
+            this.mDragEnabled = dragEnabled;
+            this.mClickable = clickable;
         }
 
         @Override
@@ -74,17 +146,31 @@ public abstract class FloatingWindow {
             mGestureDetector = new GestureDetector(mOnGestureListener);
             int mScreenWidth = mWindowManager.getDefaultDisplay().getWidth();
             int mScreenHeight = mWindowManager.getDefaultDisplay().getHeight();
-            mWindowView = LayoutInflater.from(mContext).inflate(R.layout.default_text_floting_window_layout,null);
+            if (mContentResourceId != 0 && mContentView != null){
+                throw new IllegalStateException("Content View and Content layout Resource can only choose one");
+            }
+
+            if (mContentResourceId == 0 && mContentView == null){
+                throw new IllegalStateException("Window Content can not be null in custom mode");
+            }
+            if (mContentView != null){
+                mWindowView = mContentView;
+            }else if (mContentResourceId != 0){
+                mWindowView = LayoutInflater.from(mContext).inflate(mContentResourceId,null);
+            }
+
             mWindowView.setOnTouchListener(mOnTouchListener);
+
             mWindowParams = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
 
             mWindowParams.format = PixelFormat.RGBA_8888;
             mWindowParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
             mWindowParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
             mWindowParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-            mWindowParams.gravity = Gravity.CENTER;
-            mWindowParams.x = mScreenWidth;
-            mWindowParams.y = mScreenHeight;
+            mWindowParams.gravity = mGravity;
+
+            mWindowParams.x = mWindowPositionX == 0 ? mScreenWidth : mWindowPositionX;
+            mWindowParams.y = mWindowPositionY == 0 ? mScreenHeight : mWindowPositionY;
 
             mWindowManager.addView(mWindowView,mWindowParams);
 
@@ -95,6 +181,7 @@ public abstract class FloatingWindow {
         public void dismiss() {
             if (mWindowView != null && mWindowVisiable){
                 mWindowManager.removeView(mWindowView);
+                mWindowView = null;
                 mWindowVisiable = false;
             }
         }
@@ -118,15 +205,19 @@ public abstract class FloatingWindow {
                     @Override
                     public boolean onScroll(MotionEvent e1, MotionEvent e2,
                                             float distanceX, float distanceY) {
-                        mLiveTranslationX -= distanceX;
-                        mLiveTranslationY -= distanceY;
-                        relayout();
+                        if (mDragEnabled){
+                            mLiveTranslationX -= distanceX;
+                            mLiveTranslationY -= distanceY;
+                            relayout();
+                        }
                         return true;
                     }
 
                     @Override
                     public boolean onSingleTapConfirmed(MotionEvent e) {
-                        Toast.makeText(mContext, "Click Me!", Toast.LENGTH_SHORT).show();
+                        if (mClickable){
+                            Toast.makeText(mContext, "Click Me!", Toast.LENGTH_SHORT).show();
+                        }
                         return true;
                     }
                 };

@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FloatingWindow.create(this,"Hello",200,200, Gravity.BOTTOM).show();
+        FloatingWindow floatingWindow = new FloatingWindow.Builder(this,Gravity.CENTER).setClickable(true).setDragEnabled(true).setContentView(R.layout.default_text_floting_window_layout).buildCustom();
+        floatingWindow.show();
     }
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FloatingWindowDemo</string>
+    <string name="str_permission_needed">Permission have not granted</string>
 </resources>
