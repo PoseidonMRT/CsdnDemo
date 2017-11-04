@@ -14,6 +14,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import com.example.code.floatingwindowdemo.callback.ScreenShotCallBack;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.UUID;
@@ -36,9 +38,12 @@ public class ScreenShotHelper {
     private DisplayMetrics mDisplayMetrics;
     private VirtualDisplay mVirtualDisplay;
 
+    private boolean mNavigationBarEnabled;
+    private ScreenShotCallBack mScreenShotCallBack;
+
     private static ScreenShotHelper mScreenShotHelper;
 
-    private ScreenShotHelper(Context context){
+    private ScreenShotHelper(Context context) {
         mWindowWidth = Utils.getDeviceWidth(context);
         mWindowHeight = Utils.getAbsoluteDeviceHeight(context);
 
@@ -48,26 +53,33 @@ public class ScreenShotHelper {
         mContext = context;
     }
 
-    public synchronized static ScreenShotHelper getInstance(Context context){
-        if (mScreenShotHelper == null){
+    public synchronized static ScreenShotHelper getInstance(Context context) {
+        if (mScreenShotHelper == null) {
             mScreenShotHelper = new ScreenShotHelper(context);
         }
         return mScreenShotHelper;
     }
 
-    public void takeScreenShot(String filePath,String fileName){
-            mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 1);
-            mImageReader.setOnImageAvailableListener(new ImageAvailableListener(), handler);
-            mVirtualDisplay = FloatingWindowApplication.getInstance().getMediaProjection().createVirtualDisplay("capture_screen",
-                    mWindowWidth, mWindowHeight, mDisplayMetrics.densityDpi,
-                    DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION, mImageReader.getSurface
-                            (), null, null);
+    public void takeScreenShot(boolean navigationBarEnabled, ScreenShotCallBack screenShotCallBack) {
+
+        if (FloatingWindowApplication.getInstance().getMediaProjection() == null){
+            throw new IllegalStateException("MediaProjection Permission have not grated");
+        }
+
+        mNavigationBarEnabled = navigationBarEnabled;
+        mScreenShotCallBack = screenShotCallBack;
+        mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 1);
+        mImageReader.setOnImageAvailableListener(new ImageAvailableListener(), handler);
+        mVirtualDisplay = FloatingWindowApplication.getInstance().getMediaProjection().createVirtualDisplay("capture_screen",
+                mWindowWidth, mWindowHeight, mDisplayMetrics.densityDpi,
+                DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION, mImageReader.getSurface
+                        (), null, null);
     }
 
     class ImageAvailableListener implements ImageReader.OnImageAvailableListener {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            Log.e(TAG,"Image Available");
+            Log.e(TAG, "Image Available");
             Image image = reader.acquireLatestImage();
             if (image == null) {
                 return;
@@ -76,8 +88,8 @@ public class ScreenShotHelper {
             int width = image.getWidth();
             int height = image.getHeight();
             //delete soft key height from page if needed
-            if (Utils.hasNavBar(mContext)) {
-                Log.e(TAG,"has navigation bar");
+            if (Utils.hasNavBar(mContext) && !mNavigationBarEnabled) {
+                Log.e(TAG, "has navigation bar");
                 height -= Utils.getNavigationBarHeight(mContext);
             }
 
@@ -91,14 +103,13 @@ public class ScreenShotHelper {
                     .Config.ARGB_8888);
             bitmap.copyPixelsFromBuffer(buffer);
             image.close();
-
-            Log.e(TAG,"bitmap  create success ");
+            if (bitmap == null) {
+                Log.e(TAG, "file save failure ");
+                mScreenShotCallBack.screenShotError(new IOException("create bitmap failed!"));
+            }
+            Log.e(TAG, "bitmap  create success ");
             try {
-                mScreenShotCallBack.screenShotSuccess(mImagePath + mImageName);
-            } catch (IOException e) {
-                Log.e(TAG,"file save failure ");
-                Log.e(TAG,e.toString());
-                mScreenShotCallBack.screenShotFailure(e);
+                mScreenShotCallBack.screenShotSuccess(Utils.bitmap2Bytes(bitmap));
             } finally {
                 if (mImageReader != null) {
                     mImageReader.close();

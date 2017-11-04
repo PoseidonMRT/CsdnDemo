@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.DisplayMetrics;
@@ -11,6 +12,7 @@ import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -162,5 +164,16 @@ public class Utils {
             e.printStackTrace();
         }
         return statusBarHeight;
+    }
+
+    /**
+     * convert bitmap to byte array
+     * @param bitmap src bitmap
+     * @return
+     */
+    public static byte[] bitmap2Bytes(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
     }
 }
