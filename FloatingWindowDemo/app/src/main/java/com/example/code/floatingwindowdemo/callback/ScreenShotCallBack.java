@@ -8,5 +8,6 @@ package com.example.code.floatingwindowdemo.callback;
  */
 public interface ScreenShotCallBack {
     void screenShotSuccess(byte[] image);
+    void screenShotSuccess(String imagePath);
     void screenShotError(Exception e);
 }

@@ -7,12 +7,16 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Build;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -175,5 +179,54 @@ public class Utils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
+    }
+
+    public static void saveBitmapFile(String path, Bitmap bitmap, boolean isCreate) throws
+            IOException {
+        FileOutputStream fos = null;
+        try {
+            File file = new File(path);
+            //SD卡是否存在
+            if (!isAvailable()) {
+                return;
+            }
+            //文件是否存在
+            if (!file.exists()) {
+                if (isCreate) {
+                    File parent = file.getParentFile();
+                    if (!parent.exists()) {
+                        parent.mkdirs();
+                        file.createNewFile();
+                    }
+                }
+            }
+
+            fos = new FileOutputStream(path);
+            // 截图不存在透明色,保存为PNG无意义.PNG模式无法质量压缩,改成JPEG并压缩10%可将图片体积压缩至约1/3大小
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos);
+        } finally {
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (Exception ignored) {
+                }
+            }
+        }
+    }
+
+    /**
+     * SD卡是否可用
+     *
+     * @return 只有当SD卡已经安装并且准备好了才返回true
+     */
+    public static boolean isAvailable() {
+        return getState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    /**
+     * 获取SD卡的状态
+     */
+    public static String getState() {
+        return Environment.getExternalStorageState();
     }
 }

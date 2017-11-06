@@ -39,6 +39,8 @@ public class ScreenShotHelper {
     private VirtualDisplay mVirtualDisplay;
 
     private boolean mNavigationBarEnabled;
+    private boolean mNeedSaveFile;
+    private String mImagePath,mImageName;
     private ScreenShotCallBack mScreenShotCallBack;
 
     private static ScreenShotHelper mScreenShotHelper;
@@ -60,20 +62,33 @@ public class ScreenShotHelper {
         return mScreenShotHelper;
     }
 
-    public void takeScreenShot(boolean navigationBarEnabled, ScreenShotCallBack screenShotCallBack) {
+    public void takeScreenShot(boolean navigationBarEnabled, ScreenShotCallBack screenShotCallBack,boolean needSaveFile,String path,String name) {
 
         if (FloatingWindowApplication.getInstance().getMediaProjection() == null){
             throw new IllegalStateException("MediaProjection Permission have not grated");
         }
 
-        mNavigationBarEnabled = navigationBarEnabled;
         mScreenShotCallBack = screenShotCallBack;
-        mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 1);
-        mImageReader.setOnImageAvailableListener(new ImageAvailableListener(), handler);
-        mVirtualDisplay = FloatingWindowApplication.getInstance().getMediaProjection().createVirtualDisplay("capture_screen",
-                mWindowWidth, mWindowHeight, mDisplayMetrics.densityDpi,
-                DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION, mImageReader.getSurface
-                        (), null, null);
+        mNavigationBarEnabled = navigationBarEnabled;
+        mNeedSaveFile = needSaveFile;
+        mImagePath = path;
+        mImageName = name;
+
+        if (mNeedSaveFile && (mImageName == null || mImagePath == null)){
+            throw new IllegalStateException("image path and image name must be not null when save tag true");
+        }
+        //post delay when take screen shot[fix image gray error]
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 1);
+                mImageReader.setOnImageAvailableListener(new ImageAvailableListener(), handler);
+                mVirtualDisplay = FloatingWindowApplication.getInstance().getMediaProjection().createVirtualDisplay("capture_screen",
+                        mWindowWidth, mWindowHeight, mDisplayMetrics.densityDpi,
+                        DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION, mImageReader.getSurface
+                                (), null, null);
+            }
+        },300);
     }
 
     class ImageAvailableListener implements ImageReader.OnImageAvailableListener {
@@ -109,7 +124,15 @@ public class ScreenShotHelper {
             }
             Log.e(TAG, "bitmap  create success ");
             try {
-                mScreenShotCallBack.screenShotSuccess(Utils.bitmap2Bytes(bitmap));
+                if (mNeedSaveFile){
+                    Utils.saveBitmapFile(mImagePath + mImageName, bitmap, true);
+                    mScreenShotCallBack.screenShotSuccess(mImagePath + mImageName);
+                }else{
+                    mScreenShotCallBack.screenShotSuccess(Utils.bitmap2Bytes(bitmap));
+                }
+            } catch (IOException e) {
+                mScreenShotCallBack.screenShotError(e);
+                e.printStackTrace();
             } finally {
                 if (mImageReader != null) {
                     mImageReader.close();
