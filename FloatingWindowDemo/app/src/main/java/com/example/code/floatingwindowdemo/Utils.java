@@ -9,6 +9,7 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,6 +28,37 @@ import java.lang.reflect.Method;
  * @date 2017/11/3
  */
 public class Utils {
+
+    /**
+     *
+     * @param context
+     * @param size
+     * @return true:画质清晰，不需要提示用户,false:画质较差，提示用户
+     */
+    public static boolean getScreenRecordSize(Context context,Point size){
+        int screenWith = getDeviceWidth(context);
+        int screenHeight = getDeviceHeight(context);
+        Log.e("Utils","screen width:"+screenWith+"  screenHeight:"+screenHeight);
+        if (screenWith / 1080 >= 1 && screenHeight / 1920 >= 1) {
+            size.x = 1080;
+            size.y = 1920;
+            return true;
+        } else if (screenWith / 720 >= 1 && screenHeight / 1280 >= 1) {
+            size.x = 720;
+            size.y = 1280;
+            return true;
+        } else if (screenWith / 360 >= 1 && screenHeight / 640 >= 1) {
+            size.x = 360;
+            size.y = 640;
+            return false;
+        } else if (screenWith / 180 >= 1 && screenHeight / 320 >= 1) {
+            size.x = 180;
+            size.y = 320;
+            return false;
+        }
+        return false;
+    }
+
     /**
      * 获得设备的屏幕宽度
      *
