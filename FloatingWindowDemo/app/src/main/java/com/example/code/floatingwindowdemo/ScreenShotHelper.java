@@ -138,6 +138,10 @@ public class ScreenShotHelper {
                     mImageReader.close();
                     mImageReader = null;
                 }
+                if (mVirtualDisplay != null){
+                    mVirtualDisplay.release();
+                    mVirtualDisplay = null;
+                }
             }
         }
     }
