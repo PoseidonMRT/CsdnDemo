@@ -139,6 +139,7 @@ public class ScreenShotHelper {
                     mImageReader = null;
                 }
                 if (mVirtualDisplay != null){
+                    //must release virtual display,otherwise system will reboot in lenovo tablet
                     mVirtualDisplay.release();
                     mVirtualDisplay = null;
                 }
