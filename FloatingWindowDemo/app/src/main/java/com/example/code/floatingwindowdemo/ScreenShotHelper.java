@@ -8,6 +8,7 @@ import android.hardware.display.VirtualDisplay;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.MediaCas;
+import android.media.projection.MediaProjection;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.DisplayMetrics;
@@ -34,6 +35,9 @@ public class ScreenShotHelper {
 
     private int mWindowWidth;
     private int mWindowHeight;
+    /**
+     * Application context
+     */
     private Context mContext;
     private DisplayMetrics mDisplayMetrics;
     private VirtualDisplay mVirtualDisplay;
@@ -62,7 +66,15 @@ public class ScreenShotHelper {
         return mScreenShotHelper;
     }
 
-    public void takeScreenShot(boolean navigationBarEnabled, ScreenShotCallBack screenShotCallBack,boolean needSaveFile,String path,String name) {
+    /**
+     * @param mediaProjection
+     * @param navigationBarEnabled
+     * @param screenShotCallBack
+     * @param needSaveFile
+     * @param path
+     * @param name
+     */
+    public void takeScreenShot(final MediaProjection mediaProjection, boolean navigationBarEnabled, ScreenShotCallBack screenShotCallBack, boolean needSaveFile, String path, String name) {
 
         if (FloatingWindowApplication.getInstance().getMediaProjection() == null){
             throw new IllegalStateException("MediaProjection Permission have not grated");
@@ -83,7 +95,7 @@ public class ScreenShotHelper {
             public void run() {
                 mImageReader = ImageReader.newInstance(mWindowWidth, mWindowHeight, PixelFormat.RGBA_8888, 1);
                 mImageReader.setOnImageAvailableListener(new ImageAvailableListener(), handler);
-                mVirtualDisplay = FloatingWindowApplication.getInstance().getMediaProjection().createVirtualDisplay("capture_screen",
+                mVirtualDisplay = mediaProjection.createVirtualDisplay("capture_screen",
                         mWindowWidth, mWindowHeight, mDisplayMetrics.densityDpi,
                         DisplayManager.VIRTUAL_DISPLAY_FLAG_PRESENTATION, mImageReader.getSurface
                                 (), null, null);
