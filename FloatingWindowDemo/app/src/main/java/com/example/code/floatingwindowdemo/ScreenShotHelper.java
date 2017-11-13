@@ -55,8 +55,8 @@ public class ScreenShotHelper {
 
         mDisplayMetrics = new DisplayMetrics();
         Utils.getScreenMetrics(context, mDisplayMetrics);
-
-        mContext = context;
+        //avoid memory linked
+        mContext = context.getApplicationContext();
     }
 
     public synchronized static ScreenShotHelper getInstance(Context context) {

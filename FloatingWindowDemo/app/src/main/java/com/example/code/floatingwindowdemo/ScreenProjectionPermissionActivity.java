@@ -20,12 +20,9 @@ public class ScreenProjectionPermissionActivity extends Activity {
     public static final String TAG = "ScreenProjectionService";
     private MediaProjection mMediaProjection;
     private static final int REQUEST_CODE = 10;
-    private MediaProjectionManager mMediaProjectionManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mMediaProjectionManager = (MediaProjectionManager) getSystemService(MEDIA_PROJECTION_SERVICE);
         Log.e(TAG, "Permission Request Activity");
         Intent captureIntent = FloatingWindowApplication.getInstance().getMediaProjectionManager().createScreenCaptureIntent();
         startActivityForResult(captureIntent, REQUEST_CODE);
@@ -36,7 +33,7 @@ public class ScreenProjectionPermissionActivity extends Activity {
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Log.e(TAG,"Permission Request Activity Result OK");
-                mMediaProjection = mMediaProjectionManager.getMediaProjection(resultCode, data);
+                mMediaProjection = FloatingWindowApplication.getInstance().getMediaProjectionManager().getMediaProjection(resultCode, data);
                 FloatingWindowApplication.getInstance().setMediaProjection(mMediaProjection);
 
             } else {

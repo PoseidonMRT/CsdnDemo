@@ -224,8 +224,4 @@ public abstract class FloatingWindow {
 
 
     }
-
-
-
-
 }
