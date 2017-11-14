@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Volumes/Android_Code/OpenCVProject/OPenCV02/OpenCVLibrary/src/main/jniLibs"/></dataSet><dataSet config="release"><source path="/Volumes/Android_Code/OpenCVProject/OPenCV02/OpenCVLibrary/src/release/jniLibs"/></dataSet></merger>
