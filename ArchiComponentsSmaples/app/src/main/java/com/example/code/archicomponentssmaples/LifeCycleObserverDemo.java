@@ -66,7 +66,8 @@ public class LifeCycleObserverDemo extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onDestroy() {
+        super.onDestroy();
+        getLifecycle().removeObserver(myLifeCycleObserver);
     }
 }
