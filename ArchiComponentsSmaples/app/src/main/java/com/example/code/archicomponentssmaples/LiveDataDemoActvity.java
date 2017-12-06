@@ -27,7 +27,6 @@ public class LiveDataDemoActvity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.live_data_demo_layout);
         mUserNameViewModal = ViewModelProviders.of(this).get(UserNameViewModal.class);
-        mUserNameViewModal.getCurrentUserName().setValue("John");
         initView();
         initData();
     }
