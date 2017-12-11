@@ -93,6 +93,9 @@ public class ScreenRecorderService extends Service implements ScreenProjectionLi
 
     @Override
     public void onEncodingH264RawCompeleted(byte[] h264Raw) {
+        //矫正宽高
+        mWindowWidth = Utils.getDeviceWidth(this);
+        mWindowHeight = Utils.getAbsoluteDeviceHeight(this);
         //h264Raw ------ video data
 
     }
@@ -102,6 +105,9 @@ public class ScreenRecorderService extends Service implements ScreenProjectionLi
             throw new IllegalStateException("MediaProjection Permission have not grated");
         }
 
+        //矫正宽高
+        mWindowWidth = Utils.getDeviceWidth(this);
+        mWindowHeight = Utils.getAbsoluteDeviceHeight(this);
         mScreenrecorder = new ScreenProjectionWrapper(mWindowWidth,mWindowHeight, ScreenProjectionConfig.SCREEN_PROJECTION_VIDEO_BITRATE,
                 mDisplayMetrics.densityDpi, FloatingWindowApplication.getInstance().getMediaProjection());
         mScreenrecorder.setScreenProjectionListerner(this);
