@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Camera2Demo</string>
+    <string name="permissions_remind">permission needed</string>
+    <string name="str_grant_permission">please grant camera permissions</string>
+</resources>
