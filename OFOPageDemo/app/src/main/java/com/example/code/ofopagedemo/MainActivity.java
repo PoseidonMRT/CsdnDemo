@@ -8,7 +8,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        findViewById(R.id.frame).setBackground(new ArcBackgroundDrawable());
+        setContentView(R.layout.activity_bg);
+//        findViewById(R.id.frame).setBackground(new ArcBackgroundDrawable());
     }
 }
