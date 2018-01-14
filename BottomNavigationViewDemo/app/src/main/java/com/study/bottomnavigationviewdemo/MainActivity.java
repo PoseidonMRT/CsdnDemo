@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
   private BottomNavigationView mBottomNavigationView;
   private ViewPager mViewPager;
   private MusicsFragment mMusicsFragment;
+  private MusicsFragment mMusicsFragment1;
   private SchedulesFragment mSchedulesFragment;
   private FavirotesFragment mFavirotesFragment;
   private int mCurrentItem = 0;
@@ -32,14 +33,17 @@ public class MainActivity extends AppCompatActivity {
 
   private void initView(){
     mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+    BottomNavigationViewHelper.disableShiftMode(mBottomNavigationView);
     mViewPager = (ViewPager)findViewById(R.id.viewpager);
     mFavirotesFragment = new FavirotesFragment();
     mMusicsFragment = new MusicsFragment();
+    mMusicsFragment1 = new MusicsFragment();
     mSchedulesFragment = new SchedulesFragment();
     List<Fragment> _fragments = new ArrayList<>();
     _fragments.add(mFavirotesFragment);
     _fragments.add(mSchedulesFragment);
     _fragments.add(mMusicsFragment);
+    _fragments.add(mMusicsFragment1);
     mViewPager.setAdapter(new FragmentsPagerAdapter(getSupportFragmentManager(),_fragments));
     mViewPager.setCurrentItem(0);
     mViewPager.addOnPageChangeListener(new OnPageChangeListener() {
@@ -50,13 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
       @Override
       public void onPageSelected(int position) {
-        if (position == 0){
-          mBottomNavigationView.setSelectedItemId(R.id.action_favorites);
-        }else if (position == 1){
-          mBottomNavigationView.setSelectedItemId(R.id.action_schedules);
-        }else if (position == 2){
-          mBottomNavigationView.setSelectedItemId(R.id.action_music);
-        }
+        mBottomNavigationView.getMenu().getItem(position).setChecked(true);
       }
 
       @Override
@@ -89,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                 if (mCurrentItem != 2){
                   mViewPager.setCurrentItem(2);
                   mCurrentItem = 2;
+                }
+                break;
+              case R.id.action_other:
+                if (mCurrentItem != 3){
+                  mViewPager.setCurrentItem(3);
+                  mCurrentItem = 3;
                 }
                 break;
             }
