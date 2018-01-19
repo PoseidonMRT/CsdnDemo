@@ -19,5 +19,6 @@
         app:tabTextAppearance="@style/MyCustomTextAppearance"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorPrimary"
         app:tabGravity="fill"></android.support.design.widget.TabLayout>
 </LinearLayout>

@@ -25,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initTabs(){
-        mTabLayout.addTab(mTabLayout.newTab().setText("first Tab").setIcon(R.mipmap.ic_launcher_round));
-        mTabLayout.addTab(mTabLayout.newTab().setText("second Tab").setIcon(R.mipmap.ic_launcher_round));
-        mTabLayout.addTab(mTabLayout.newTab().setText("third Tab").setIcon(R.mipmap.ic_launcher_round));
-        mTabLayout.addTab(mTabLayout.newTab().setText("four Tab").setIcon(R.mipmap.ic_launcher_round));
+        mTabLayout.addTab(mTabLayout.newTab().setText("first Tab").setIcon(R.drawable.bottom_bar_screen_record_state_list));
+        mTabLayout.addTab(mTabLayout.newTab().setText("second Tab").setIcon(R.drawable.bottom_bar_video_manager_state_list));
+        mTabLayout.addTab(mTabLayout.newTab().setText("third Tab").setIcon(R.drawable.bottom_bar_discover_state_list));
+        mTabLayout.addTab(mTabLayout.newTab().setText("four Tab").setIcon(R.drawable.bottom_bar_match_state_list));
     }
 }
