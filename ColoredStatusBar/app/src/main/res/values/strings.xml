@@ -1,0 +1,10 @@
+<resources>
+  <string name="app_name">ColoredStatusBar</string>
+  <string name="purple">紫</string>
+  <string name="blue">蓝</string>
+  <string name="verdant">青</string>
+  <string name="red">红</string>
+  <string name="orange">橙</string>
+  <string name="yellow">黄</string>
+  <string name="green">绿</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context="com.study.coloredstatusbar.MainActivity">
+
+  <android.support.design.widget.TabLayout
+    android:layout_alignParentTop="true"
+    android:id="@+id/tabs"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:tabMode="fixed"
+    app:tabIndicatorHeight="0dp">
+    <android.support.design.widget.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:text="@string/red"/>
+    <android.support.design.widget.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:text="@string/orange"/>
+    <android.support.design.widget.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:text="@string/yellow"/>
+    <android.support.design.widget.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:text="@string/green"/>
+    <android.support.design.widget.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:text="@string/verdant"/>
+    <android.support.design.widget.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:text="@string/blue"/>
+    <android.support.design.widget.TabItem
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:text="@string/purple"/>
+  </android.support.design.widget.TabLayout>
+
+</RelativeLayout>
