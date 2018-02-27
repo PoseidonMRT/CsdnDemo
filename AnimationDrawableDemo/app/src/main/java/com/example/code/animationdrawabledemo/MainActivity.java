@@ -10,8 +10,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Rectangle2CircleDrawable drawable = new Rectangle2CircleDrawable(Color.RED);
-//        findViewById(R.id.text).setBackground(drawable);
-//        drawable.start();
+        SubRingRotateDrawable drawable = new SubRingRotateDrawable(Color.parseColor("#f08d43"));
+        findViewById(R.id.text).setBackground(drawable);
+        drawable.start();
     }
 }
