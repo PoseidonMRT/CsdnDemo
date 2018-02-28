@@ -42,7 +42,6 @@ public class Rectangle2CircleDrawable extends Drawable {
         Rect bounds = getBounds();
         canvas.rotate(mDrawingRotate,bounds.left+bounds.width()/2,bounds.top+bounds.height()/2);
         canvas.drawRoundRect(bounds.left, bounds.top, bounds.right, bounds.bottom, mDrawingRadius, mDrawingRadius, mPaint);
-        canvas.restore();
     }
 
     @Override

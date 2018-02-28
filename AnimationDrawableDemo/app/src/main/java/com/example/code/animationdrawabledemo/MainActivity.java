@@ -42,5 +42,18 @@ public class MainActivity extends AppCompatActivity {
         FourCircleRotateDrawable fourCircleRotateDrawable = new FourCircleRotateDrawable();
         findViewById(R.id.four_circle_rotate).setBackground(fourCircleRotateDrawable);
         fourCircleRotateDrawable.start();
+
+        CircleRingDrawable circleRingDrawable = new CircleRingDrawable(Color.parseColor("#f08d43"),Color.parseColor("#f08d43"));
+        findViewById(R.id.circle_ring).setBackground(circleRingDrawable);
+        circleRingDrawable.start();
+
+        FiveCircleScaleDrawable fiveCircleScaleDrawable = new FiveCircleScaleDrawable();
+        findViewById(R.id.five_circle_scale).setBackground(fiveCircleScaleDrawable);
+        fiveCircleScaleDrawable.start();
+
+        StrokeRectangleDrawable strokeRectangleDrawable = new StrokeRectangleDrawable(Color.parseColor("#f08d43"));
+        findViewById(R.id.stroke_rectangle).setBackground(strokeRectangleDrawable);
+        strokeRectangleDrawable.start();
+
     }
 }
