@@ -55,5 +55,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.stroke_rectangle).setBackground(strokeRectangleDrawable);
         strokeRectangleDrawable.start();
 
+        ThreeCircleRotateDrawable threeCircleRotateDrawable = new ThreeCircleRotateDrawable();
+        findViewById(R.id.three_circle_rotate).setBackground(threeCircleRotateDrawable);
+        threeCircleRotateDrawable.start();
+
     }
 }

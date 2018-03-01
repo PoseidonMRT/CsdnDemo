@@ -43,6 +43,7 @@ public class FourCircleRotateDrawable extends Drawable {
         double angle = 3.1415926/180;
         double r = bounds.width() > bounds.height() ? bounds.height()*0.4:bounds.width()*0.4;
         canvas.drawCircle((float) (centerX), (float) (centerY),(float)(1.2*r),mBiggerCiclePaint);
+        r=r*0.5;
         canvas.drawCircle((float) (centerX+r*Math.cos(0*angle)), (float) (centerY + (r * Math.sin(0*angle))),(float) (r*0.2),mLittleCirclePaint);
         canvas.drawCircle((float) (centerX+r*Math.cos(90*angle)), (float) (centerY + (r * Math.sin(90*angle))),(float) (r*0.2),mLittleCirclePaint);
         canvas.drawCircle((float) (centerX+r*Math.cos(180*angle)), (float) (centerY + (r * Math.sin(180*angle))),(float) (r*0.2),mLittleCirclePaint);

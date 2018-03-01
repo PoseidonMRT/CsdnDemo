@@ -36,7 +36,7 @@ public class CircualRotateDrawable extends Drawable {
         super();
         mCiclePaint = new Paint();
         mCiclePaint.setColor(Color.parseColor("#f08d43"));
-        mCiclePaint.setStrokeWidth(5);
+        mCiclePaint.setStrokeWidth(10);
         mCiclePaint.setStyle(Paint.Style.STROKE);
     }
 
@@ -45,7 +45,7 @@ public class CircualRotateDrawable extends Drawable {
         canvas.rotate(mRotate, getBounds().left + getBounds().width() / 2, getBounds().top + getBounds().height() / 2);
         RectF rectF = new RectF(getBounds().left + 10, getBounds().top + 10, getBounds().right - 10, getBounds().bottom - 10);
         canvas.drawArc(rectF, 0, mOuterSwipe, false, mCiclePaint);
-        RectF innerRectF = new RectF(getBounds().left + 20, getBounds().top + 20, getBounds().right - 20, getBounds().bottom - 20);
+        RectF innerRectF = new RectF(getBounds().left + 30, getBounds().top + 30, getBounds().right - 30, getBounds().bottom - 30);
         canvas.drawArc(innerRectF, -180, mInnerSwipe, false, mCiclePaint);
     }
 

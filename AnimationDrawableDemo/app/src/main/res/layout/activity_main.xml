@@ -157,5 +157,19 @@
       app:layout_constraintStart_toEndOf="@+id/five_circle_scale"
       app:layout_constraintTop_toBottomOf="@+id/four_circle_rotate"
       app:layout_constraintVertical_bias="0.148"/>
+    <TextView
+      android:id="@+id/three_circle_rotate"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.346"
+      app:layout_constraintStart_toEndOf="@+id/stroke_rectangle"
+      app:layout_constraintTop_toBottomOf="@+id/circle_ring"
+      app:layout_constraintVertical_bias="0.148"/>
 
 </android.support.constraint.ConstraintLayout>
