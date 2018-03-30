@@ -1,0 +1,35 @@
+mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            ViewGroup vg = (ViewGroup) mTabLayout.getChildAt(0);
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                ViewGroup vgTab = (ViewGroup) vg.getChildAt(tab.getPosition());
+                if (tab.getPosition()==0)
+                    vg.getChildAt(tab.getPosition()).setBackgroundResource(R.drawable.ic_bg);
+
+                else if (tab.getPosition()==mTabLayout.getTabCount()-1)
+                    vg.getChildAt(tab.getPosition()).setBackgroundResource(R.drawable.ic_bg);
+
+                else
+                    vg.getChildAt(tab.getPosition()).setBackgroundResource(R.drawable.ic_bg);
+
+                int tabChildsCount = vgTab.getChildCount();
+                for (int i = 0; i < tabChildsCount; i++) {
+                    View tabViewChild = vgTab.getChildAt(i);
+                    if (tabViewChild instanceof TextView) {
+                        tabViewChild.setPadding(0, 0, 0, 0);
+                    }
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                ViewGroup vgTab = (ViewGroup) vg.getChildAt(tab.getPosition());
+                vg.getChildAt(tab.getPosition()).setBackgroundResource(0);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
