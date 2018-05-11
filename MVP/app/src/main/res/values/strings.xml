@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MVP</string>
+    <string name="load_data_error">Load data error!</string>
+</resources>
