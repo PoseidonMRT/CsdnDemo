@@ -11,5 +11,6 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     PolarViewWithPoints polarView = findViewById(R.id.polar_view);
     polarView.startAnimation(8);
+
   }
 }
