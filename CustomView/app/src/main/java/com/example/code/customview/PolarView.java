@@ -23,7 +23,7 @@ public class PolarView extends View {
   private int mWidth;
   private int mHeight;
 
-  private int mTmpPointCount;
+  private int mTmpPointCount = 10;
 
   private ValueAnimator mValueAnimator;
 

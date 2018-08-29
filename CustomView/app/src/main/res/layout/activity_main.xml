@@ -6,7 +6,7 @@
   android:layout_height="match_parent"
   tools:context="com.example.code.customview.MainActivity">
 
-  <com.example.code.customview.PolarView
+  <com.example.code.customview.PolarViewWithPoints
     android:id="@+id/polar_view"
     android:layout_width="400dp"
     android:layout_height="400dp"

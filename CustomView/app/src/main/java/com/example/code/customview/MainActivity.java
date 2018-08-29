@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    PolarView polarView = findViewById(R.id.polar_view);
-    polarView.startAnimation(30);
+    PolarViewWithPoints polarView = findViewById(R.id.polar_view);
+    polarView.startAnimation(8);
   }
 }
