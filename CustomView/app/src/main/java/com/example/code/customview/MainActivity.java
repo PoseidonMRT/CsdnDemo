@@ -9,8 +9,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    PolarViewWithPoints polarView = findViewById(R.id.polar_view);
-    polarView.startAnimation(8);
-
+    FourArcView fourArcView = findViewById(R.id.four_arc_view);
+    fourArcView.startAnimation();
   }
 }

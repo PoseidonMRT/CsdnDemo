@@ -6,8 +6,8 @@
   android:layout_height="match_parent"
   tools:context="com.example.code.customview.MainActivity">
 
-  <com.example.code.customview.PolarViewWithPoints
-    android:id="@+id/polar_view"
+  <com.example.code.customview.FourArcView
+    android:id="@+id/four_arc_view"
     android:layout_width="400dp"
     android:layout_height="400dp"
     app:layout_constraintBottom_toBottomOf="parent"
