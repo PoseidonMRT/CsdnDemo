@@ -1,0 +1,137 @@
+package com.example.code.customview;
+
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.support.annotation.Nullable;
+import android.util.AttributeSet;
+import android.view.View;
+
+/**
+ * @author
+ * @Date 2018/10/12
+ * @description
+ * @since 1.0.0
+ */
+public class HexagonalView extends View {
+
+  private Path mPath;
+  private PathMeasure mPathMeasure;
+
+  private int mCenterX, mCenterY;
+  private int mRadius;
+  private Paint mHexagonalPaint;
+
+  private Paint mLinePaint;
+  private int mLineDistance;
+
+  private float mCurrentValue;
+
+  private ValueAnimator mValueAnimator;
+
+  public HexagonalView(Context context) {
+    super(context);
+    init();
+  }
+
+  public HexagonalView(Context context, @Nullable AttributeSet attrs) {
+    super(context, attrs);
+    init();
+  }
+
+  public HexagonalView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+    init();
+  }
+
+  private void init() {
+    mRadius = 20;
+    mLineDistance = 20;
+
+    mHexagonalPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    mHexagonalPaint.setStrokeWidth(8);
+    mHexagonalPaint.setColor(Color.BLUE);
+    mHexagonalPaint.setStyle(Style.STROKE);
+
+    mLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    mLinePaint.setColor(Color.GREEN);
+    mLinePaint.setStrokeWidth(8);
+    mLinePaint.setStyle(Style.STROKE);
+
+    mPath = new Path();
+  }
+
+  @Override
+  protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    super.onSizeChanged(w, h, oldw, oldh);
+    if (w > 0 && h > 0) {
+      mCenterX = w / 2;
+      mCenterY = h / 2;
+      initPath();
+    }
+  }
+
+  @Override
+  protected void onDraw(Canvas canvas) {
+    super.onDraw(canvas);
+    canvas.drawPath(mPath,mHexagonalPaint);
+    float length = mPathMeasure.getLength();
+    Path linePath = new Path();
+    linePath.reset();
+    linePath.rLineTo(0,0);
+    mPathMeasure.getSegment(length*mCurrentValue,length*mCurrentValue+mLineDistance,linePath,true);
+    canvas.drawPath(linePath,mLinePaint);
+  }
+
+  private void initPath() {
+    mPath.reset();
+
+    mPath.moveTo(mCenterX, mCenterY);
+    mPath.lineTo(mCenterX - mRadius + mRadius * (float) Math.cos(Math.PI * 60 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 60 / 180));
+    mPath.lineTo(mCenterX - mRadius + mRadius * (float) Math.cos(Math.PI * 120 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 120 / 180));
+    mPath.lineTo(mCenterX - mRadius + mRadius * (float) Math.cos(Math.PI * 180 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 180 / 180));
+    mPath.lineTo(mCenterX - mRadius + mRadius * (float) Math.cos(Math.PI * 240 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 240 / 180));
+    mPath.lineTo(mCenterX - mRadius + mRadius * (float) Math.cos(Math.PI * 300 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 300 / 180));
+    mPath.lineTo(mCenterX, mCenterY);
+
+    mPath.lineTo(mCenterX + mRadius + mRadius * (float) Math.cos(Math.PI * 120 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 120 / 180));
+    mPath.lineTo(mCenterX + mRadius + mRadius * (float) Math.cos(Math.PI * 60 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 60 / 180));
+    mPath.lineTo(mCenterX + mRadius + mRadius * (float) Math.cos(Math.PI * 0 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 0 / 180));
+    mPath.lineTo(mCenterX + mRadius + mRadius * (float) Math.cos(Math.PI * 300 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 300 / 180));
+    mPath.lineTo(mCenterX + mRadius + mRadius * (float) Math.cos(Math.PI * 240 / 180),
+        mCenterY + mRadius * (float) Math.sin(Math.PI * 240 / 180));
+    mPath.lineTo(mCenterX, mCenterY);
+
+    mPathMeasure = new PathMeasure(mPath,false);
+  }
+
+  public void startAnimation(){
+    mValueAnimator = ValueAnimator.ofFloat(0,1.0f);
+    mValueAnimator.addUpdateListener(new AnimatorUpdateListener() {
+      @Override
+      public void onAnimationUpdate(ValueAnimator animation) {
+        mCurrentValue = (float) animation.getAnimatedValue();
+        postInvalidate();
+      }
+    });
+    mValueAnimator.setDuration(3000);
+    mValueAnimator.setRepeatMode(ValueAnimator.RESTART);
+    mValueAnimator.setRepeatCount(-1);
+    mValueAnimator.start();
+  }
+}

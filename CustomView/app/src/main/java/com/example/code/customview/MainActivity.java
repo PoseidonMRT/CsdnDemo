@@ -9,7 +9,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    FourArcView fourArcView = findViewById(R.id.four_arc_view);
-    fourArcView.startAnimation();
+    RingCircleView arcPointLoadingView = findViewById(R.id.four_arc_view);
+    arcPointLoadingView.startAnimation();
   }
 }

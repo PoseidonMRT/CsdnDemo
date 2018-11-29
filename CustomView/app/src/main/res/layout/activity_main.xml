@@ -6,10 +6,10 @@
   android:layout_height="match_parent"
   tools:context="com.example.code.customview.MainActivity">
 
-  <com.example.code.customview.FourArcView
+  <com.example.code.customview.RingCircleView
     android:id="@+id/four_arc_view"
-    android:layout_width="400dp"
-    android:layout_height="400dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"

@@ -63,7 +63,6 @@ public class PolarView extends View {
 
   public void startAnimation(int count) {
     mValueAnimator = ValueAnimator.ofInt(3, count);
-    mValueAnimator.setDuration(5000);
     mValueAnimator.addUpdateListener(new AnimatorUpdateListener() {
       @Override
       public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -71,6 +70,9 @@ public class PolarView extends View {
         postInvalidate();
       }
     });
+    mValueAnimator.setDuration(5000);
+    mValueAnimator.setRepeatCount(-1);
+    mValueAnimator.setRepeatMode(ValueAnimator.RESTART);
     mValueAnimator.start();
   }
 
